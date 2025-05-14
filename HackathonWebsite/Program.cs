@@ -1,7 +1,25 @@
+using HackathonWebsite.DAL.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using FluentValidation;
+using HackathonWebsite.BLL.Services;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Validators
+builder.Services.AddValidatorsFromAssembly(Assembly.Load("HackathonWebsite.BLL"));
+
+// Mappers
+builder.Services.AddAutoMapper(Assembly.Load("HackathonWebsite.BLL"));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<HackathonDbContext>(opt => opt.UseSqlite(connectionString));
+
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 
