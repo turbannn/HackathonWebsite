@@ -22,10 +22,29 @@ namespace HackathonWebsite.Controllers
             return View();
         }
 
+        [HttpGet("/Home/TryLogin")]
+        public IActionResult Login()
+        {
+            var AT = Request.Cookies["jwt"];
+
+            if (AT is null)
+            {
+                return View();
+            }
+
+            return RedirectToAction("UserProfileView", "Users");
+        }
+
+        [HttpGet("/Home/Register")]
+        public IActionResult RegistrationView()
+        {
+            return View("RegistrationView");
+        }
+
         public async Task<IActionResult> Test()
         {
             Console.WriteLine("Test Executed!");
-            await _userService.AddUserAsync(new UserCreateDto{Id = 0, Role = "User", Username = "testUser", Password = "qwerty123"});
+            //await _userService.AddUserAsync(new UserCreateDto{Id = 0, Role = "User", Username = "testUser", Password = "qwerty123"});
             return Ok();
         }
 

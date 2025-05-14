@@ -2,8 +2,12 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <a class="btn btn-outline-primary btn-lg" asp-controller="Home" asp-action="Test">Test</a>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<script src="~/js/HomeFrontend.js"></script>
+
+<div class="d-flex flex-column align-items-center justify-content-center" style="height: 80vh;">
+    <h1 class="display-3 mb-4" style="font-weight: bold; color: #333;">Hackathon website</h1>
+    <div class="d-flex gap-3">
+        <button class="btn btn-outline-primary btn-lg" onclick="LoginRedirection()">Login</button>
+        <button class="btn btn-outline-success btn-lg" onclick="RedirectToRegistration()">Sign Up</button>
+    </div>
 </div>

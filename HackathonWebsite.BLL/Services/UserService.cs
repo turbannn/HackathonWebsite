@@ -42,6 +42,14 @@ namespace HackathonWebsite.BLL.Services
             return userReadDto;
         }
 
+        public async Task<UserReadDto?> GetUserByNameAndPasswordAsync(string username, string password)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+            if (user is null) return null;
+
+            return _mapper.Map<UserReadDto>(user);
+        }
+
         public async Task<bool> AddUserAsync(UserCreateDto userCreateDto)
         {
             var validationResult = await _validator.ValidateAsync(userCreateDto);

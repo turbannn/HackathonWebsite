@@ -1,0 +1,42 @@
+﻿@model HackathonWebsite.BLL.DtoEntities.UserDtos.UserReadDto
+
+@{
+    ViewData["Title"] = "User Profile";
+}
+
+<script src="~/js/UsersFrontend.js"></script>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 style="font-weight: bold; color: #333;">Welcome, @Model.Username!</h1>
+            <p class="text-muted">Here is your expense dashboard</p>
+        </div>
+    </div>
+
+    <div class="mb-4">
+        <a class="btn btn-outline-success" onclick="RedirectToExpenseCreation()">+ Create New Expense</a>
+        <button class="btn btn-primary" onclick="RedirectToDeletedExpenses()">Deleted expenses</button>
+        <button class="btn btn-outline-danger" onclick="logout()">Log Out</button>
+    </div>
+
+    <hr />
+
+    <h3 class="mb-4" style="color: #555;">Total Expenses: <strong>$@ViewBag.Expenses</strong></h3>
+
+    <table class="table table-hover">
+        <thead class="table-light">
+        <tr>
+            <th>Id</th>
+            <th>Value</th>
+            <th>Description</th>
+            <th>Creation Date</th>
+            <th>Categories</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</div>
