@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HackathonWebsite.BLL.DtoEntities.UserDtos.UserRating>
+﻿@model IEnumerable<HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos.TaskRatingReadDto>
 
 <div class="text-center">
     <h1 class="display-4">Users rating</h1>
@@ -9,7 +9,8 @@
     <table class="table">
         <thead>
         <tr>
-            <th>Username</th>
+            <th>Name</th>
+            <th>User</th>
             <th>Rating</th>
             <th>Actions</th>
         </tr>
@@ -18,19 +19,27 @@
         @foreach (var r in Model)
         {
             <tr>
-                <td>@r.Username</td>
+                <td>@r.Name</td>
+                <td>@r.UserName</td>
                 <td>@r.Rating</td>
                 <td>
+                        @if (User.IsInRole("User") || User.IsInRole("Teacher") || User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-sm btn-outline-primary me-1" asp-controller="Rating" asp-action="View" asp-route-username="@r.UserName">
+                            View
+                        </a>
+                    }
+
                     @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
                     {
-                        <a class="btn btn-sm btn-outline-primary me-1" asp-controller="Rating" asp-action="Rate" asp-route-username="@r.Username">
+                        <a class="btn btn-sm btn-outline-primary me-1" asp-controller="Rating" asp-action="Rate" asp-route-username="@r.UserName">
                             Rate
                         </a>
                     }
 
                     @if (User.IsInRole("Admin"))
                     {
-                        <a class="btn btn-sm btn-outline-danger" asp-controller="Rating" asp-action="Delete" asp-route-username="@r.Username">
+                        <a class="btn btn-sm btn-outline-danger" asp-controller="Rating" asp-action="Delete" asp-route-username="@r.UserName">
                             Delete
                         </a>
                     }

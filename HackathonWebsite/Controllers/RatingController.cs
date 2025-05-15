@@ -8,12 +8,10 @@ namespace HackathonWebsite.Controllers
 {
     public class RatingController : Controller
     {
-        private readonly UserService _userService;
-        private readonly IMapper _mapper;
-        public RatingController(UserService userService, IMapper mapper)
+        private readonly RatingService _ratingService;
+        public RatingController(RatingService ratingService)
         {
-            _userService = userService;
-            _mapper = mapper;
+            _ratingService = ratingService;
         }
 
         public async Task<IActionResult> RedirectToIndex()
@@ -25,21 +23,15 @@ namespace HackathonWebsite.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-            var users = await _userService.GetAllUsersAsync();
+            var ratingTasks = await _ratingService.GetAllRatingTasksAsync();
 
-            var ratings = _mapper.Map<List<UserRating>>(users);
-
-            return View("Index", ratings);
+            return View("Index", ratingTasks);
         }
 
         [Authorize(Roles = "User,Teacher,Admin")]
         public async Task<IActionResult> Index()
         {
-            var users = await _userService.GetAllUsersAsync();
-
-            var ratings = _mapper.Map<List<UserRating>>(users);
-
-            return View(ratings);
+            return View();
         }
     }
 }

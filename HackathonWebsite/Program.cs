@@ -26,6 +26,7 @@ builder.Services.AddDbContext<HackathonDbContext>(opt => opt.UseSqlite(connectio
 
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<HackathonTaskService>();
+builder.Services.AddScoped<RatingService>();
 
 builder.Services.AddScoped<TokenProvider>();
 

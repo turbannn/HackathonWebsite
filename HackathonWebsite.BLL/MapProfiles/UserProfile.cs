@@ -13,8 +13,6 @@ namespace HackathonWebsite.BLL.MapProfiles
             CreateMap<UserCreateDto, User>();
             CreateMap<UserUpdateDto, User>();
 
-            CreateMap<UserReadDto, UserRating>();
-
             CreateMap<UserCreateDto, UserReadDto>();
         }
     }
