@@ -1,5 +1,4 @@
-﻿
-using HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos;
+﻿using HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos;
 using HackathonWebsite.BLL.Interfaces;
 
 namespace HackathonWebsite.BLL.DtoEntities.UserDtos
@@ -9,6 +8,6 @@ namespace HackathonWebsite.BLL.DtoEntities.UserDtos
         public string Username { get; set; } = null!;
         public string Role { get; set; } = null!;
 
-        public List<HackathonTaskDto> Tasks { get; set; } = null!;
+        public List<TaskProfileReadDto> Tasks { get; set; } = null!;
     }
 }

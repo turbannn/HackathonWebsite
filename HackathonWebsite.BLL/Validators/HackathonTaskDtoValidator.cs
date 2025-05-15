@@ -1,9 +1,9 @@
-﻿using HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos;
-using FluentValidation;
+﻿using FluentValidation;
+using HackathonWebsite.BLL.Interfaces;
 
 namespace HackathonWebsite.BLL.Validators
 {
-    public class HackathonTaskDtoValidator : AbstractValidator<HackathonTaskDto>
+    public class HackathonTaskDtoValidator : AbstractValidator<ITaskTransferObject>
     {
         public HackathonTaskDtoValidator()
         {

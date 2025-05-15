@@ -8,9 +8,11 @@ namespace HackathonWebsite.BLL.MapProfiles
     {
         public HackathonTaskProfile()
         {
-            CreateMap<HackathonTask, HackathonTaskDto>();
+            CreateMap<HackathonTask, TaskProfileReadDto>();
+            CreateMap<HackathonTask, TaskRatingReadDto>();
 
-            CreateMap<HackathonTaskDto, HackathonTask>();
+            CreateMap<TaskCreateDto, HackathonTask>();
+            CreateMap<TaskUpdateDto, HackathonTask>();
         }
     }
 }

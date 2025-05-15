@@ -17,7 +17,7 @@ namespace HackathonWebsite.Controllers
 
         [Authorize(Roles = "User,Teacher,Admin")]
         [HttpPost("/Tasks/CreateTask")]
-        public async Task<IActionResult> CreateExpense([FromBody] HackathonTaskDto hackathonDto)
+        public async Task<IActionResult> CreateExpense([FromBody] TaskCreateDto hackathonDto)
         {
             var idStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "no";
 
@@ -55,7 +55,7 @@ namespace HackathonWebsite.Controllers
 
         [Authorize(Roles = "User,Teacher,Admin")]
         [HttpPut("/Tasks/EditTask/{id}")]
-        public async Task<IActionResult> EditTask([FromBody] HackathonTaskDto hackathonDto)
+        public async Task<IActionResult> EditTask([FromBody] TaskUpdateDto hackathonDto)
         {
             var idStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "no";
 
@@ -82,7 +82,7 @@ namespace HackathonWebsite.Controllers
         [HttpGet("/Tasks/EditTask/{id}")]
         public async Task<IActionResult> EditTask(int id)
         {
-            var expense = await _taskService.GetTaskByIdAsync(id);
+            var expense = await _taskService.GetProfileTaskByIdAsync(id);
 
             if (expense == null) return NotFound();
 
@@ -93,7 +93,7 @@ namespace HackathonWebsite.Controllers
         [HttpGet("/Tasks/GetTask/{id}")]
         public async Task<IActionResult> GetExpense(int id)
         {
-            var expense = await _taskService.GetTaskByIdAsync(id);
+            var expense = await _taskService.GetProfileTaskByIdAsync(id);
 
             if (expense == null)
                 return NotFound(new { success = false, message = "Expense not found" });

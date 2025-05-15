@@ -4,44 +4,36 @@ using HackathonWebsite.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using FluentValidation;
 using AutoMapper;
+using HackathonWebsite.BLL.Interfaces;
 
 namespace HackathonWebsite.BLL.Services
 {
     public class HackathonTaskService
     {
         private readonly HackathonDbContext _context;
-        private readonly IValidator<HackathonTaskDto> _validator;
+        private readonly IValidator<ITaskTransferObject> _validator;
         private readonly IMapper _mapper;
 
-        public HackathonTaskService(HackathonDbContext context, IValidator<HackathonTaskDto> expenseValidator, IMapper mapper)
+        public HackathonTaskService(HackathonDbContext context, IValidator<ITaskTransferObject> taskValidator, IMapper mapper)
         {
             _context = context;
-            _validator = expenseValidator;
+            _validator = taskValidator;
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<HackathonTaskDto>> GetAllExpensesAsync()
-        {
-            var expenses = await _context.HackathonTasks.ToListAsync();
-
-            var expenseDtos = _mapper.Map<List<HackathonTaskDto>>(expenses);
-
-            return expenseDtos;
-        }
-
-        public async Task<HackathonTaskDto?> GetTaskByIdAsync(int id)
+        public async Task<TaskProfileReadDto?> GetProfileTaskByIdAsync(int id)
         {
             if (id < 0) return null;
 
-            var expense = await _context.HackathonTasks.FirstOrDefaultAsync(t => t.Id == id);
-            if (expense == null) return null;
+            var task = await _context.HackathonTasks.FirstOrDefaultAsync(t => t.Id == id);
+            if (task == null) return null;
 
-            var expenseDTO = _mapper.Map<HackathonTaskDto>(expense);
+            var taskDTO = _mapper.Map<TaskProfileReadDto>(task);
 
-            return expenseDTO;
+            return taskDTO;
         }
 
-        public async Task<bool> AddTaskAsync(HackathonTaskDto hackathonDto)
+        public async Task<bool> AddTaskAsync(TaskCreateDto hackathonDto)
         {
             var validationResult = await _validator.ValidateAsync(hackathonDto);
             if (!validationResult.IsValid)
@@ -55,9 +47,9 @@ namespace HackathonWebsite.BLL.Services
 
             try
             {
-                var expense = _mapper.Map<HackathonTask>(hackathonDto);
+                var task = _mapper.Map<HackathonTask>(hackathonDto);
 
-                await _context.HackathonTasks.AddAsync(expense);
+                await _context.HackathonTasks.AddAsync(task);
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -68,7 +60,7 @@ namespace HackathonWebsite.BLL.Services
             }
         }
 
-        public async Task<bool> UpdateTaskAsync(HackathonTaskDto hackathonDto)
+        public async Task<bool> UpdateTaskAsync(TaskUpdateDto hackathonDto)
         {
             var validationResult = await _validator.ValidateAsync(hackathonDto);
 
