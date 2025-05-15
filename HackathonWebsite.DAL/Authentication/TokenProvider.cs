@@ -14,7 +14,7 @@ namespace HackathonWebsite.DAL.Authentication
         {
             _configuration = configuration;
         }
-        public string CreateAccessToken(int id, string role)
+        public string CreateAccessToken(int id, string username, string role)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]!));
 
@@ -24,6 +24,7 @@ namespace HackathonWebsite.DAL.Authentication
             {
                 Subject = new ClaimsIdentity([
                     new Claim(JwtRegisteredClaimNames.Sub, id.ToString()),
+                    new Claim(ClaimTypes.Name, username),
                     new Claim(ClaimTypes.Role, role)
                 ]),
                 Expires = DateTime.Now.AddMinutes(15),

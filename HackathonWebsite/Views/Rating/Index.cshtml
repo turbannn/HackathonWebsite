@@ -1,0 +1,42 @@
+﻿@model IEnumerable<HackathonWebsite.BLL.DtoEntities.UserDtos.UserRating>
+
+<div class="text-center">
+    <h1 class="display-4">Users rating</h1>
+    <br />
+    <hr />
+    <br />
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Rating</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var r in Model)
+        {
+            <tr>
+                <td>@r.Username</td>
+                <td>@r.Rating</td>
+                <td>
+                    @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-sm btn-outline-primary me-1" asp-controller="Rating" asp-action="Rate" asp-route-username="@r.Username">
+                            Rate
+                        </a>
+                    }
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-sm btn-outline-danger" asp-controller="Rating" asp-action="Delete" asp-route-username="@r.Username">
+                            Delete
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

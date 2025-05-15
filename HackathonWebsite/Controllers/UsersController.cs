@@ -43,7 +43,7 @@ namespace HackathonWebsite.Controllers
                 });
             }
 
-            var tokenstr = _tokenProvider.CreateAccessToken(user.Id, user.Role);
+            var tokenstr = _tokenProvider.CreateAccessToken(user.Id, user.Username, user.Role);
 
             Response.Cookies.Append("_t", tokenstr, new CookieOptions
             {
@@ -56,7 +56,7 @@ namespace HackathonWebsite.Controllers
             return Json(new { success = true, redirectUrl = Url.Action("UserProfileView", "Users") });
         }
 
-        [Authorize(Roles = "User,Admin")]
+        [Authorize(Roles = "User,Teacher,Admin")]
         [HttpGet("/User/UserProfile")]
         public async Task<IActionResult> UserProfileView()
         {
@@ -82,12 +82,25 @@ namespace HackathonWebsite.Controllers
                 });
             }
 
+            ViewBag.Rating = user.Rating;
+
             return View(user);
         }
 
         [HttpPost("/User/SubmitRegistration")]
         public async Task<IActionResult> SubmitRegistration([FromBody] UserCreateDto userCreateDto)
         {
+            var existingUser = await _userService.GetUserByUsernameAsync(userCreateDto.Username);
+
+            if (existingUser is not null)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "User already exists!"
+                });
+            }
+
             var addResult = await _userService.AddUserAsync(userCreateDto);
 
             if (!addResult)
@@ -110,7 +123,7 @@ namespace HackathonWebsite.Controllers
                 });
             }
 
-            var tokenstr = _tokenProvider.CreateAccessToken(user.Id, user.Role);
+            var tokenstr = _tokenProvider.CreateAccessToken(user.Id, user.Username, user.Role);
 
             Response.Cookies.Append("_t", tokenstr, new CookieOptions
             {

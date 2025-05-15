@@ -10,5 +10,6 @@ namespace HackathonWebsite.BLL.Interfaces
     {
         string Username { get; set; }
         string Role { get; set; }
+        int Rating { get; set; }
     }
 }

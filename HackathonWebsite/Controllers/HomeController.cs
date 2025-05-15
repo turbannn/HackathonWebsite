@@ -25,7 +25,7 @@ namespace HackathonWebsite.Controllers
         [HttpGet("/Home/TryLogin")]
         public IActionResult Login()
         {
-            var AT = Request.Cookies["jwt"];
+            var AT = Request.Cookies["_t"];
 
             if (AT is null)
             {
@@ -41,6 +41,11 @@ namespace HackathonWebsite.Controllers
             return View("RegistrationView");
         }
 
+        [HttpGet("/Home/LogRegView")]
+        public IActionResult LogRegView()
+        {
+            return View();
+        }
         public async Task<IActionResult> Test()
         {
             Console.WriteLine("Test Executed!");

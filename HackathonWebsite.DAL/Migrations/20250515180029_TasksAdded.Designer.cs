@@ -2,6 +2,7 @@
 using HackathonWebsite.DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackathonWebsite.DAL.Migrations
 {
     [DbContext(typeof(HackathonDbContext))]
-    partial class HackathonDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250515180029_TasksAdded")]
+    partial class TasksAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.16");

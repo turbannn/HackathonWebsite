@@ -7,6 +7,7 @@ namespace HackathonWebsite.DAL.Data
     public class HackathonDbContext : DbContext
     {
         public DbSet<User> Users { get; set; } = null!;
+        public DbSet<HackathonTask> HackathonTasks { get; set; } = null!;
 
         public HackathonDbContext(DbContextOptions options) : base(options)
         {

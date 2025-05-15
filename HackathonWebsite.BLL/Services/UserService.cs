@@ -49,6 +49,13 @@ namespace HackathonWebsite.BLL.Services
 
             return _mapper.Map<UserReadDto>(user);
         }
+        public async Task<UserReadDto?> GetUserByUsernameAsync(string username)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            if (user is null) return null;
+
+            return _mapper.Map<UserReadDto>(user);
+        }
 
         public async Task<bool> AddUserAsync(UserCreateDto userCreateDto)
         {

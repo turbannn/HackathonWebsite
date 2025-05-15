@@ -6,21 +6,29 @@
 
 <script src="~/js/UsersFrontend.js"></script>
 
+<h1 class="display-3 mb-4" style="font-weight: bold; color: #333;">Join our community</h1>
 <div class="d-flex align-items-center justify-content-center" style="height: 80vh;">
     <div style="width: 400px;">
         <h1 class="mb-4 text-start" style="font-weight: bold; color: #333;">Sign Up</h1>
         <form asp-controller="Home">
             <input type="hidden" id="UserId" name="Id" value="@Model?.Id" />
-            <input type="hidden" id="UserRole" name="Role" value="User" />
 
             <div class="mb-3 text-start">
                 <label class="form-label">Username</label>
                 <input class="form-control" type="text" id="UserUsername" name="Username" placeholder="Enter username" value="@Model?.Username" />
             </div>
 
-            <div class="mb-4 text-start">
+            <div class="mb-3 text-start">
                 <label class="form-label">Password</label>
                 <input class="form-control" type="password" id="UserPassword" name="Password" placeholder="Enter password" value="@Model?.Password" />
+            </div>
+
+            <div class="mb-4 text-start">
+                <label class="form-label">Select Role</label>
+                <select class="form-select" id="UserRole" name="Role">
+                    <option value="User" selected>User</option>
+                    <option value="Teacher">Teacher</option>
+                </select>
             </div>
 
             <button class="btn btn-outline-success w-100" type="button" onclick="submitRegistration()">Sign Up</button>
