@@ -1,118 +1,82 @@
-﻿using AutoMapper;
+﻿using HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos;
+using HackathonWebsite.DAL.Entities;
+using HackathonWebsite.DAL.Data;
+using Microsoft.EntityFrameworkCore;
 using FluentValidation;
-using HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos;
+using AutoMapper;
 
 namespace HackathonWebsite.BLL.Services
 {
     public class HackathonTaskService
     {
-        /*
+        private readonly HackathonDbContext _context;
         private readonly IValidator<HackathonTaskDto> _validator;
         private readonly IMapper _mapper;
 
-        public HackathonTaskService(IValidator<HackathonTaskDto> expenseValidator,IMapper mapper)
+        public HackathonTaskService(HackathonDbContext context, IValidator<HackathonTaskDto> expenseValidator, IMapper mapper)
         {
+            _context = context;
             _validator = expenseValidator;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<ExpenseReadDTO>> GetAllExpensesAsync()
+
+        public async Task<IEnumerable<HackathonTaskDto>> GetAllExpensesAsync()
         {
-            var expenses = await _expenseRepository.GetAllAsync();
+            var expenses = await _context.HackathonTasks.ToListAsync();
 
-            var expenseDtos = _mapper.Map<List<ExpenseReadDTO>>(expenses);
-
-            return expenseDtos;
-        }
-        public async Task<IEnumerable<ExpenseReadDTO>> GetAllDeletedExpensesByUserIdAsync(int id)
-        {
-            var expenses = await _expenseRepository.GetAllDeletedByUserIdAsync(id);
-
-            var expenseDtos = _mapper.Map<List<ExpenseReadDTO>>(expenses);
+            var expenseDtos = _mapper.Map<List<HackathonTaskDto>>(expenses);
 
             return expenseDtos;
         }
 
-        public async Task<ExpenseReadDTO?> GetExpenseByIdAsync(int id)
+        public async Task<HackathonTaskDto?> GetTaskByIdAsync(int id)
         {
             if (id < 0) return null;
 
-            var expense = await _expenseRepository.GetByIdAsync(id);
+            var expense = await _context.HackathonTasks.FirstOrDefaultAsync(t => t.Id == id);
             if (expense == null) return null;
 
-            var expenseDTO = _mapper.Map<ExpenseReadDTO>(expense);
+            var expenseDTO = _mapper.Map<HackathonTaskDto>(expense);
 
             return expenseDTO;
         }
 
-        public async Task<bool> AddExpenseAsync(ExpenseCreateDTO expenseDTO)
+        public async Task<bool> AddTaskAsync(HackathonTaskDto hackathonDto)
         {
-            var validationResult = await _validator.ValidateAsync(expenseDTO);
+            var validationResult = await _validator.ValidateAsync(hackathonDto);
             if (!validationResult.IsValid) return false;
 
-            var expense = _mapper.Map<Expense>(expenseDTO);
+            var expense = _mapper.Map<HackathonTask>(hackathonDto);
 
-            if (expenseDTO.CategoryId != -1)
-            {
-                await _expenseRepository.AddWithCategoryAsync(expense, expenseDTO.CategoryId);
-                await _expenseRepository.SaveChangesAsync();
-                return true;
-            }
-
-            await _expenseRepository.AddAsync(expense);
-            await _expenseRepository.SaveChangesAsync();
+            await _context.HackathonTasks.AddAsync(expense);
+            await _context.SaveChangesAsync();
             return true;
         }
 
-        public async Task<bool> UpdateExpenseAsync(ExpenseUpdateDTO expenseDTO)
+        public async Task<bool> UpdateTaskAsync(HackathonTaskDto hackathonDto)
         {
-            var validationResult = await _validator.ValidateAsync(expenseDTO);
+            var validationResult = await _validator.ValidateAsync(hackathonDto);
 
             if (!validationResult.IsValid) return false;
 
-            var expense = _mapper.Map<Expense>(expenseDTO);
+            var expense = _mapper.Map<HackathonTask>(hackathonDto);
 
-            if (expenseDTO.CategoryId != -1)
-            {
-                await _expenseRepository.UpdateAndAddCategoryAsync(expense, expenseDTO.CategoryId);
-                await _expenseRepository.SaveChangesAsync();
-                return true;
-            }
+            await _context.HackathonTasks
+                .Where(h => h.Id == hackathonDto.Id)
+                .ExecuteUpdateAsync(setters => setters
+                    .SetProperty(h => h.Name, hackathonDto.Name)
+                    .SetProperty(h => h.Rating, hackathonDto.Rating)
+                    .SetProperty(h => h.Description, hackathonDto.Description));
 
-            if (expenseDTO.CategoryName != "-1")
-            {
-                await _expenseRepository.UpdateAndDeleteCategoryAsync(expense, expenseDTO.CategoryName);
-                await _expenseRepository.SaveChangesAsync();
-                return true;
-            }
-
-            await _expenseRepository.UpdateAsync(expense);
-            await _expenseRepository.SaveChangesAsync();
             return true;
         }
 
-        public async Task<bool> DeleteExpenseAsync(int id)
+        public async Task<bool> DeleteTaskAsync(int id)
         {
             if (id < 0) return false;
 
-            await _expenseRepository.DeleteAsync(id);
-            await _expenseRepository.SaveChangesAsync();
+            await _context.HackathonTasks.Where(h => h.Id == id).ExecuteDeleteAsync();
             return true;
         }
-        public async Task<bool> HardDeleteExpenseAsync(int id)
-        {
-            if (id < 0) return false;
-
-            await _expenseRepository.HardDeleteAsync(id);
-            return true;
-        }
-
-        public async Task<bool> RestoreExpenseAsync(int id)
-        {
-            if (id < 0) return false;
-
-            await _expenseRepository.RestoreAsync(id);
-            return true;
-        }
-        */
     }
 }

@@ -6,7 +6,7 @@ namespace HackathonWebsite.DAL.Entities
     public class HackathonTask
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int Rating { get; set; }
 

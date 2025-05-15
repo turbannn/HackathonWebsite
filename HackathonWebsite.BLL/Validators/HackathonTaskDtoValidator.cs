@@ -13,7 +13,7 @@ namespace HackathonWebsite.BLL.Validators
 
             RuleFor(h => h.Rating)
                 .NotEmpty().WithMessage("Rating is empty error")
-                .GreaterThan(0).WithMessage("Rating less than 0 error");
+                .GreaterThan(-1).WithMessage("Rating less than 0 error");
 
             //str
             RuleFor(h => h.Description)

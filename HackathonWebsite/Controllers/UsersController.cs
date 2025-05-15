@@ -82,8 +82,6 @@ namespace HackathonWebsite.Controllers
                 });
             }
 
-            ViewBag.Rating = user.Rating;
-
             return View(user);
         }
 

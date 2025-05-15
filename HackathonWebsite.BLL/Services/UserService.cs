@@ -34,7 +34,10 @@ namespace HackathonWebsite.BLL.Services
         {
             if (id < 0) return null;
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var user = await _context.Users
+                .Include(u => u.Tasks)
+                .FirstOrDefaultAsync(u => u.Id == id);
+
             if (user == null) return null;
 
             var userReadDto = _mapper.Map<UserReadDto>(user);
@@ -44,14 +47,20 @@ namespace HackathonWebsite.BLL.Services
 
         public async Task<UserReadDto?> GetUserByNameAndPasswordAsync(string username, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+            var user = await _context.Users
+                .Include(u => u.Tasks)
+                .FirstOrDefaultAsync(u => u.Username == username && u.Password == password);
+
             if (user is null) return null;
 
             return _mapper.Map<UserReadDto>(user);
         }
         public async Task<UserReadDto?> GetUserByUsernameAsync(string username)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
+            var user = await _context.Users
+                .Include(u => u.Tasks)
+                .FirstOrDefaultAsync(u => u.Username == username);
+
             if (user is null) return null;
 
             return _mapper.Map<UserReadDto>(user);
@@ -78,8 +87,9 @@ namespace HackathonWebsite.BLL.Services
             if (!validationResult.IsValid) return false;
             try
             {
-                await _context.Users.ExecuteUpdateAsync(setters => setters
-                    .SetProperty(u => u.Id, userUpdateDto.Id)
+                await _context.Users
+                    .Where(u => u.Id == userUpdateDto.Id)
+                    .ExecuteUpdateAsync(setters => setters
                     .SetProperty(u => u.Username, userUpdateDto.Username)
                     .SetProperty(u => u.Role, userUpdateDto.Role));
             }

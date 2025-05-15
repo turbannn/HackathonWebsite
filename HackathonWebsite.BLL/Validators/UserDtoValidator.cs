@@ -10,9 +10,6 @@ namespace HackathonWebsite.BLL.Validators
             RuleFor(u => u.Id)
                 .GreaterThan(-1).WithMessage("Id is less than 0");
 
-            RuleFor(u => u.Rating)
-                .GreaterThan(-1).WithMessage("Rating is less than 0");
-
             RuleFor(u => u.Username)
                 .NotEmpty().WithMessage("User Username is empty")
                 .MaximumLength(40).WithMessage("User Username maximum length exceeded");

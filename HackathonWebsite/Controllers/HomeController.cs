@@ -46,7 +46,7 @@ namespace HackathonWebsite.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> Test()
+        public IActionResult Test()
         {
             Console.WriteLine("Test Executed!");
             //await _userService.AddUserAsync(new UserCreateDto{Id = 0, Role = "User", Username = "testUser", Password = "qwerty123"});

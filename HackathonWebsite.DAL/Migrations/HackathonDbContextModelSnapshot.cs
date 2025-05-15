@@ -24,10 +24,12 @@ namespace HackathonWebsite.DAL.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(30)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Rating")

@@ -7,6 +7,5 @@ namespace HackathonWebsite.BLL.DtoEntities.UserDtos
     {
         public string Username { get; set; } = null!;
         public string Role { get; set; } = null!;
-        public int Rating { get; set; }
     }
 }

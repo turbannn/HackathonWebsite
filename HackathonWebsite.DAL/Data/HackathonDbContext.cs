@@ -16,6 +16,7 @@ namespace HackathonWebsite.DAL.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new HackathonTaskConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

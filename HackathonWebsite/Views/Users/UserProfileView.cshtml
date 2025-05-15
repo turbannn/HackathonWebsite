@@ -20,20 +20,30 @@
 
     <hr/>
 
-    <h3 class="mb-4" style="color: #555;">Your Rating: <strong>@ViewBag.Rating</strong></h3>
-
     <table class="table table-hover">
         <thead class="table-light">
         <tr>
             <th>Id</th>
-            <th>Value</th>
+            <th>Name</th>
+            <th>Rating</th>
             <th>Description</th>
-            <th>Creation Date</th>
-            <th>Categories</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
+            @foreach (var e in Model.Tasks)
+            {
+                <tr>
+                    <td>@e.Id</td>
+                    <td>@e.Name</td>
+                    <td>@e.Rating</td>
+                    <td>@e.Description</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-outline-primary me-1" onclick="RedirectToExpenseEditing(@e.Id)">Edit</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteExpense(@e.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 

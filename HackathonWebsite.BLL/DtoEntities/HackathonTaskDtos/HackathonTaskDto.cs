@@ -8,8 +8,8 @@ namespace HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos
 {
     public class HackathonTaskDto : BaseDataTransferObject
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Name { get; set; } = null!;
+        public string Description { get; set; } = null!;
         public int Rating { get; set; }
     }
 }

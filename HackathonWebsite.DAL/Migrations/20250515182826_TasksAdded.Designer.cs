@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HackathonWebsite.DAL.Migrations
 {
     [DbContext(typeof(HackathonDbContext))]
-    [Migration("20250515180029_TasksAdded")]
+    [Migration("20250515182826_TasksAdded")]
     partial class TasksAdded
     {
         /// <inheritdoc />
@@ -27,10 +27,12 @@ namespace HackathonWebsite.DAL.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
+                        .HasMaxLength(30)
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Rating")
