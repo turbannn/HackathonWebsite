@@ -5,6 +5,7 @@
 }
 
 <script src="~/js/UsersFrontend.js"></script>
+<script src="~/js/TaskFrontend.js"></script>
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -15,6 +16,7 @@
     </div>
 
     <div class="mb-4">
+        <a class="btn btn-outline-success" onclick="RedirectToTaskCreation()">Create New Task</a>
         <button class="btn btn-outline-danger" onclick="logout()">Log Out</button>
     </div>
 
@@ -39,8 +41,8 @@
                     <td>@e.Rating</td>
                     <td>@e.Description</td>
                     <td>
-                        <button type="button" class="btn btn-sm btn-outline-primary me-1" onclick="RedirectToExpenseEditing(@e.Id)">Edit</button>
-                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteExpense(@e.Id)">Delete</button>
+                        <button type="button" class="btn btn-sm btn-outline-primary me-1" onclick="RedirectToTaskEditing(@e.Id)">Edit</button>
+                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteTask(@e.Id)">Delete</button>
                     </td>
                 </tr>
             }

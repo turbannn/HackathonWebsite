@@ -25,6 +25,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<HackathonDbContext>(opt => opt.UseSqlite(connectionString));
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<HackathonTaskService>();
 
 builder.Services.AddScoped<TokenProvider>();
 

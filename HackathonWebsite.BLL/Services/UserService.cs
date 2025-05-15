@@ -69,7 +69,14 @@ namespace HackathonWebsite.BLL.Services
         public async Task<bool> AddUserAsync(UserCreateDto userCreateDto)
         {
             var validationResult = await _validator.ValidateAsync(userCreateDto);
-            if (!validationResult.IsValid) return false;
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    Console.WriteLine(error.ToString());
+                }
+                return false;
+            }
 
             var user = _mapper.Map<User>(userCreateDto);
 
@@ -84,7 +91,15 @@ namespace HackathonWebsite.BLL.Services
         public async Task<bool> UpdateUserAsync(UserUpdateDto userUpdateDto)
         {
             var validationResult = await _validator.ValidateAsync(userUpdateDto);
-            if (!validationResult.IsValid) return false;
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    Console.WriteLine(error.ToString());
+                }
+                return false;
+            }
+
             try
             {
                 await _context.Users

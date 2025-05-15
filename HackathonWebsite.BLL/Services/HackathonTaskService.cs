@@ -44,20 +44,42 @@ namespace HackathonWebsite.BLL.Services
         public async Task<bool> AddTaskAsync(HackathonTaskDto hackathonDto)
         {
             var validationResult = await _validator.ValidateAsync(hackathonDto);
-            if (!validationResult.IsValid) return false;
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    Console.WriteLine(error.ToString());
+                }
+                return false;
+            }
 
-            var expense = _mapper.Map<HackathonTask>(hackathonDto);
+            try
+            {
+                var expense = _mapper.Map<HackathonTask>(hackathonDto);
 
-            await _context.HackathonTasks.AddAsync(expense);
-            await _context.SaveChangesAsync();
-            return true;
+                await _context.HackathonTasks.AddAsync(expense);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
 
         public async Task<bool> UpdateTaskAsync(HackathonTaskDto hackathonDto)
         {
             var validationResult = await _validator.ValidateAsync(hackathonDto);
 
-            if (!validationResult.IsValid) return false;
+            if (!validationResult.IsValid)
+            {
+                foreach (var error in validationResult.Errors)
+                {
+                    Console.WriteLine(error.ToString());
+                }
+                return false;
+            }
 
             var expense = _mapper.Map<HackathonTask>(hackathonDto);
 

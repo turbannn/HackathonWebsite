@@ -86,6 +86,3 @@ async function logout() {
     await fetch("/User/Logout", { method: "POST" });
     window.location.href = "/";
 }
-function RedirectToDeletedExpenses() {
-    window.location.href = "/User/DeletedExpenses";
-}

@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "EditTask";
+}
+
+@model HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos.HackathonTaskDto
+
+<div class="text-center">
+    <h1 class="display-4">Update your Hackathon Task</h1>
+</div>
+
+<script src="~/js/TaskFrontend.js"></script>
+
+<form>
+    <input type="hidden" id="TaskId" name="Id" value="@Model?.Id" />
+    <input type="hidden" id="TaskRating" name="Rating" value="@Model?.Rating" />
+
+    <label class="mt-4">Task Name</label>
+    <input class="form-control" type="text" id="TaskName" name="Name" placeholder="Change name" value="@Model?.Name" />
+
+    <label class="mt-4">Task Description</label>
+    <input class="form-control" type="text" id="TaskDescription" name="Description" placeholder="Change description" value="@Model?.Description" />
+
+    <button class="btn btn-primary mt-4" type="button" onclick="updateTask()">Ok</button>
+</form>
