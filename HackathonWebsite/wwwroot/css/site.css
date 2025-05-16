@@ -28,8 +28,18 @@ body {
     pointer-events: none;
 }
 
-    .rate-popup.show {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-    }
+.rate-popup.show {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+body.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+body.fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}

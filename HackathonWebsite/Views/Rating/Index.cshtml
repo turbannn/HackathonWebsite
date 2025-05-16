@@ -27,7 +27,7 @@
                 <td class="position-relative">
                     @if (User.IsInRole("User") || User.IsInRole("Teacher") || User.IsInRole("Admin"))
                     {
-                        <button type="button" class="btn btn-sm btn-outline-primary me-1 mb-1" onclick="RedirectToTaskDetailedView(@r.Id)">
+                            <button type="button" class="btn btn-sm btn-outline-primary me-1 mb-1" onclick="RedirectToTaskDetailedView(@r.Id)">
                             Details
                         </button>
                     }
