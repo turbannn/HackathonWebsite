@@ -9,26 +9,77 @@
     <link rel="stylesheet" href="~/HackathonWebsite.styles.css" asp-append-version="true" />
     <script src="~/js/UsersFrontend.js"></script>
     <style>
-        .offcanvas-body {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
+        .offcanvas {
+            background-color: #2b2947 !important;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .offcanvas-header {
+            background-color: #3d3b63;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .offcanvas-title {
+            color: #F0FFFF;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-close {
+            filter: invert(1);
         }
 
         .sidebar-header {
-            font-weight: bold;
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
+            color: #F0FFFF;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .user-profile {
-            padding-top: 1rem;
-            border-top: 1px solid #ddd;
+        .nav-item .btn {
+            background-color: #3d3b63;
+            color: white;
+            border: none;
+            transition: background-color 0.3s ease;
         }
+
+        .nav-item .btn:hover {
+            background-color: #a32959;
+            color: white;
+        }
+
+        .user-profile hr {
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .user-profile strong {
+            color: #ffffff;
+        }
+
         .user-profile small {
-            display: block;
-            color: #888;
+            color: #c0bcd6;
+        }
+
+        .btn-outline-primary {
+            border-color: #f3646c;
+            color: #f3646c;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: #f3646c;
+            color: white;
+        }
+
+        .btn-outline-danger {
+            border-color: #ff4d6d;
+            color: #ff4d6d;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #ff4d6d;
+            color: white;
         }
     </style>
 </head>
@@ -38,27 +89,29 @@
         ☰
     </button>
 
+
     <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-        <div class="offcanvas-header border-bottom">
+        <div class="offcanvas-header">
             <h4 class="offcanvas-title" id="sidebarMenuLabel">The Hackathon</h4>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body bg-light">
+
+        <div class="offcanvas-body">
             <div>
-                <div class="sidebar-header fw-semibold text-secondary mb-3">Navigation</div>
+                <div class="sidebar-header fw-semibold mb-3">Navigation</div>
                 <ul class="nav flex-column gap-2">
                     <li class="nav-item">
-                        <a class="btn btn-light w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Home" asp-action="Index">
+                        <a class="btn w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Home" asp-action="Index">
                             🏠 Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-light w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Rating" asp-action="RedirectToIndex">
+                        <a class="btn w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Rating" asp-action="RedirectToIndex">
                             📊 Rating
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-light w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Home" asp-action="RegistrationView">
+                        <a class="btn w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Home" asp-action="RegistrationView">
                             📝 Sign Up
                         </a>
                     </li>
@@ -71,24 +124,23 @@
                 {
                     var username = User.Identity.Name;
                     var role = User.IsInRole("Admin") ? "Admin" :
-                        User.IsInRole("Teacher") ? "Teacher" :
-                        User.IsInRole("User") ? "User" : "Unknown";
+                    User.IsInRole("Teacher") ? "Teacher" :
+                    User.IsInRole("User") ? "User" : "Unknown";
 
                     <div class="mb-2">
                         <strong>👤 @username</strong><br />
-                        <small class="text-muted">Role: @role</small>
+                        <small>Role: @role</small>
                     </div>
                     <a class="btn btn-outline-primary w-100 mb-2 rounded-3" asp-controller="Home" asp-action="Login">Profile</a>
                     <form>
                         <button class="btn btn-outline-danger w-100 rounded-3" onclick="logout()">Logout</button>
                     </form>
-
                 }
                 else
                 {
                     <div class="mb-2">
                         <strong>👤 Guest</strong><br />
-                        <small class="text-muted">Role: None</small>
+                        <small>Role: None</small>
                     </div>
                     <a class="btn btn-outline-primary w-100 rounded-3" asp-controller="Home" asp-action="Login">Login</a>
                 }

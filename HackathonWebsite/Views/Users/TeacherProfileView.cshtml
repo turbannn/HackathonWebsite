@@ -1,16 +1,18 @@
 ﻿@model HackathonWebsite.BLL.DtoEntities.UserDtos.UserReadDto
 
 @{
-    ViewData["Title"] = "User Profile";
+    ViewData["Title"] = "Teacher Profile";
 }
 
 <script src="~/js/UsersFrontend.js"></script>
+<script src="~/js/snow.js"></script>
+<link rel="stylesheet" href="~/css/profileStyle.css" />
 
-<div class="container mt-5">
+<div class="profile-container">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 style="font-weight: bold; color: #333;">Welcome, @Model.Username!</h1>
-            <p class="text-muted">Hackathon Teacher profile</p>
+            <h1 class="fw-bold text-dark">Welcome, @Model.Username!</h1>
+            <p class="text-muted">Hackathon Teacher Profile</p>
         </div>
     </div>
 
@@ -18,16 +20,17 @@
         <button class="btn btn-outline-danger" onclick="logout()">Log Out</button>
     </div>
 
-    <hr/>
-    <h3>Rated tasks</h3>
-    <table class="table table-hover">
+    <hr class="mb-4"/>
+    <h4 class="mb-3">📚 Rated Tasks</h4>
+
+    <table class="table table-bordered table-striped rounded-3 overflow-hidden shadow">
         <thead class="table-light">
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Rating</th>
-            <th>Description</th>
-        </tr>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Rating</th>
+                <th>Description</th>
+            </tr>
         </thead>
         <tbody>
         @foreach (var e in Model.Tasks)
@@ -41,5 +44,4 @@
         }
         </tbody>
     </table>
-
 </div>

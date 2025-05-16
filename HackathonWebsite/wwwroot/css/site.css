@@ -1,24 +1,122 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
+table thead tr th {
+    text-align: left;
+}
+
+.wideTable table {
+    min-width: 100%;
+}
+.leftAlign th,
+.leftAlign td {
+    text-align: left !important;
+}
+.fixedFc thead tr th:first-child,
+.fixedFc tbody tr td:first-child {
+    width: 8em;
+    min-width: 8em;
+    max-width: 8em;
+    word-break: break-all;
+}
+
+.fixedFc th:nth-child(2) {
+    padding: 9px 20px;
+    font-size: 21px;
+}
+
+.fixedFc td:nth-child(2),
+.fixedFc tr > td:last-of-type {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 17em;
+}
+
+.wideFc td:nth-child(1),
+.wideFc tr > td:last-of-type {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 36em;
+}
+
+.customMargin table {
+    margin: 25px 0;
+}
+
+.purpleRed table {
+    background-color: #3d3b63;
+    border-collapse: collapse;
+    border-radius: 10px;
+    font-size: 1em;
+    color: white;
+    overflow: hidden;
+    width: auto;
+    /*max-width: 100%;*/
+}
+
+.purpleRed thead {
+    background-color: #f3646c;
+}
+
+.purpleRed th {
+    letter-spacing: 0.3px;
+    text-shadow: 0 1px 1px #2b2a466b;
+}
+
+.purpleRed table > thead > tr > th {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.purpleRed td {
+    background-color: #3d3b63;
+    color: white;
+}
+
+    .purpleRed td strong {
+        color: white;
+    }
+
+.purpleRed td,
+.purpleRed th {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 11px;
+}
+
+    .purpleRed thead th:hover,
+    .purpleRed thead tr:hover,
+    .purpleRed th:hover {
+        background-color: #f3646c;
+    }
+
+.purpleRed tbody tr:hover td,
+.purpleRed tbody tr:hover td a {
+    background-color: #a32959;
+    color: white;
+}
+/* --------------------------------------------   */
+
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
 .rate-popup {

@@ -6,9 +6,57 @@
 
 <script src="~/js/UsersFrontend.js"></script>
 
-<div class="d-flex align-items-center justify-content-center" style="height: 80vh;">
-    <div class="p-4 rounded-4 shadow" style="width: 400px; background-color: #f8f9fa;">
-        <h1 class="mb-4 text-start fw-bold text-dark">Sign Up</h1>
+<!-- Фон и стили оформления -->
+<style>
+    body {
+        background-color: #3d3b63;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .register-container {
+        background-color: #2b2947;
+        color: white;
+    }
+
+        .register-container input,
+        .register-container select {
+            background-color: #4b496d;
+            color: white;
+            border: 1px solid #5f5c8a;
+        }
+
+            .register-container input::placeholder {
+                color: #c7c6d6;
+            }
+
+            .register-container input:focus,
+            .register-container select:focus {
+                background-color: #5a587b;
+                color: white;
+                border-color: #f3646c;
+                box-shadow: 0 0 0 0.2rem rgba(243, 100, 108, 0.25);
+            }
+
+    .register-title {
+        color: #f3646c;
+    }
+
+    .register-button {
+        background-color: #f3646c;
+        color: white;
+        border: none;
+    }
+
+        .register-button:hover {
+            background-color: #ff4e64;
+        }
+</style>
+
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="p-4 rounded-4 shadow register-container" style="width: 400px;">
+        <h1 class="mb-4 text-start fw-bold register-title">Sign Up</h1>
+
         <form asp-controller="Home">
             <input type="hidden" id="UserId" name="Id" value="@Model?.Id" />
 
@@ -30,7 +78,7 @@
                 </select>
             </div>
 
-            <button class="btn btn-success w-100 rounded-3" type="button" onclick="submitRegistration()">Sign Up</button>
+            <button class="btn register-button w-100 rounded-3" type="button" onclick="submitRegistration()">Sign Up</button>
         </form>
     </div>
 </div>

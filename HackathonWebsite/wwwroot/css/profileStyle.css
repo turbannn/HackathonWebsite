@@ -1,0 +1,43 @@
+﻿body {
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
+}
+
+.snow {
+    position: absolute;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall linear infinite;
+    z-index: -1;
+}
+
+.profile-container {
+    max-width: 900px;
+    margin: 60px auto;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        margin: 30px 20px;
+        padding: 20px;
+    }
+}
+
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}

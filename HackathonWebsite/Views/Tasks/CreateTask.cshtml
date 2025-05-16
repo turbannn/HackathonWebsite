@@ -1,24 +1,31 @@
 ﻿@{
-    ViewData["Title"] = "CreateTask";
+    ViewData["Title"] = "Create Task";
 }
 
 @model HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos.TaskProfileReadDto
 
-<div class="text-center">
-    <h1 class="display-4">Create new Hackathon Task</h1>
-</div>
-
 <script src="~/js/TaskFrontend.js"></script>
+<link rel="stylesheet" href="~/css/profileStyle.css" />
 
-<form>
-    <input type="hidden" id="TaskId" name="Id" value="@Model?.Id" />
-    <input type="hidden" id="TaskRating" name="Rating" value="0" />
+<div class="profile-container">
+    <h1 class="mb-4 fw-bold text-center text-dark">Create a New Hackathon Task</h1>
 
-    <label class="mt-4">Task Name</label>
-    <input class="form-control" type="text" id="TaskName" name="Name" placeholder="Enter name" value="@Model?.Name" />
+    <form>
+        <input type="hidden" id="TaskId" name="Id" value="@Model?.Id" />
+        <input type="hidden" id="TaskRating" name="Rating" value="0" />
 
-    <label class="mt-4">Task Description</label>
-    <input class="form-control" type="text" id="TaskDescription" name="Description" placeholder="Enter description" value="@Model?.Description" />
+        <div class="mb-4">
+            <label for="TaskName" class="form-label fw-semibold">📝 Task Name</label>
+            <input class="form-control rounded-3" type="text" id="TaskName" name="Name" placeholder="Enter name" value="@Model?.Name" />
+        </div>
 
-    <button class="btn btn-primary mt-4" type="button" onclick="submitTask()">Ok</button>
-</form>
+        <div class="mb-4">
+            <label for="TaskDescription" class="form-label fw-semibold">📌 Task Description</label>
+            <textarea class="form-control rounded-3" id="TaskDescription" name="Description" rows="4" placeholder="Enter description">@Model?.Description</textarea>
+        </div>
+
+        <div class="text-end">
+            <button class="btn btn-outline-success" type="button" onclick="submitTask()">➕ Create Task</button>
+        </div>
+    </form>
+</div>

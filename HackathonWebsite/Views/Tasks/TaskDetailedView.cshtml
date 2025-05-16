@@ -1,53 +1,52 @@
 ﻿@{
-    ViewData["Title"] = "TaskDetails";
+    ViewData["Title"] = "Task Details";
 }
 
 @model HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos.TaskProfileReadDto
 
 <script src="~/js/TaskFrontend.js"></script>
+<link rel="stylesheet" href="~/css/profileStyle.css" />
 
-<div class="d-flex justify-content-center mt-5">
-    <div class="p-4 rounded-4 shadow" style="width: 70%; background-color: #f8f9fa;">
-        <h1 class="mb-4 fw-bold text-center text-dark">Hackathon Task Details</h1>
+<div class="profile-container">
+    <h1 class="mb-4 fw-bold text-center text-dark">📄 Hackathon Task Details</h1>
 
-        <form>
-            <div class="d-flex gap-3 mt-4">
-                @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
-                {
-                    <div class="position-relative">
-                        <button type="button" class="btn btn-sm btn-outline-primary me-1" onclick="toggleRatePopupDetails()">Rate</button>
+    <form>
+        <div class="d-flex flex-wrap gap-3 justify-content-end mb-4">
+            @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
+            {
+                <div class="position-relative">
+                    <button type="button" class="btn btn-sm btn-outline-primary" onclick="toggleRatePopupDetails()">Rate</button>
 
-                        <div id="ratePopup" class="rate-popup border rounded-3 p-3 shadow bg-white position-absolute mt-2" style="z-index: 1000; width: 250px;">
-                            <label for="ratingInput" class="form-label">Rating (0–100)</label>
-                            <input type="hidden" id="TaskId" value="@Model?.Id" />
-                            <input type="number" id="ratingInput" class="form-control mb-2" min="0" max="100" />
-                            <button type="button" class="btn btn-sm btn-outline-success w-100" onclick="submitRatingDetails()">Confirm</button>
-                        </div>
+                    <div id="ratePopup" class="rate-popup border rounded-3 p-3 shadow bg-white position-absolute mt-2" style="z-index: 1000; width: 250px;">
+                        <label for="ratingInput" class="form-label">Rating (0–100)</label>
+                        <input type="hidden" id="TaskId" value="@Model?.Id" />
+                        <input type="number" id="ratingInput" class="form-control mb-2" min="0" max="100" />
+                        <button type="button" class="btn btn-sm btn-outline-success w-100" onclick="submitRatingDetails()">Confirm</button>
                     </div>
-                }
+                </div>
+            }
 
-                @if (User.IsInRole("Admin"))
-                {
-                    <button type="button" class="btn btn-outline-danger" onclick="deleteTask()">Delete</button>
-                }
-            </div>
+            @if (User.IsInRole("Admin"))
+            {
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteTask()">Delete</button>
+            }
+        </div>
 
-            <input type="hidden" id="TaskId" name="Id" value="@Model?.Id"/>
+        <input type="hidden" id="TaskId" name="Id" value="@Model?.Id" />
 
-            <div class="mb-4">
-                <label class="form-label fw-semibold">Task Rating</label>
-                <input readonly class="form-control rounded-3" type="text" id="TaskRating" name="Rating" value="@Model?.Rating"/>
-            </div>
+        <div class="mb-4">
+            <label class="form-label fw-semibold">⭐ Task Rating</label>
+            <input readonly class="form-control rounded-3" type="text" id="TaskRating" name="Rating" value="@Model?.Rating" />
+        </div>
 
-            <div class="mb-4">
-                <label class="form-label fw-semibold">Task Name</label>
-                <input readonly class="form-control rounded-3" type="text" id="TaskName" name="Name" value="@Model?.Name" />
-            </div>
+        <div class="mb-4">
+            <label class="form-label fw-semibold">📝 Task Name</label>
+            <input readonly class="form-control rounded-3" type="text" id="TaskName" name="Name" value="@Model?.Name" />
+        </div>
 
-            <div class="mb-4">
-                <label class="form-label fw-semibold">Task Description</label>
-                <textarea readonly class="form-control rounded-3" id="TaskDescription" name="Description" rows="4">@Model?.Description</textarea>
-            </div>
-        </form>
-    </div>
+        <div class="mb-4">
+            <label class="form-label fw-semibold">📌 Task Description</label>
+            <textarea readonly class="form-control rounded-3" id="TaskDescription" name="Description" rows="4">@Model?.Description</textarea>
+        </div>
+    </form>
 </div>

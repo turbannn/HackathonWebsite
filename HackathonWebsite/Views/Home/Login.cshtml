@@ -6,10 +6,63 @@
 
 <script src="~/js/UsersFrontend.js"></script>
 
-<div class="d-flex align-items-center justify-content-center" style="height: 80vh;">
-    <div class="p-4 rounded-4 shadow" style="width: 400px; background-color: #f8f9fa;">
+<!-- Фон всей страницы -->
+<style>
+    body {
+        background-color: #3d3b63;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    .login-container {
+        background-color: #2b2947;
+        color: white;
+    }
+
+        .login-container input {
+            background-color: #4b496d;
+            color: white;
+            border: 1px solid #5f5c8a;
+        }
+
+            .login-container input::placeholder {
+                color: #c7c6d6;
+            }
+
+            .login-container input:focus {
+                background-color: #5a587b;
+                color: white;
+                border-color: #f3646c;
+                box-shadow: 0 0 0 0.2rem rgba(243, 100, 108, 0.25);
+            }
+
+    .login-title {
+        color: #f3646c;
+    }
+
+    .login-button {
+        background-color: #f3646c;
+        color: white;
+        border: none;
+    }
+
+        .login-button:hover {
+            background-color: #ff4e64;
+        }
+
+    a {
+        color: #f3646c;
+    }
+
+        a:hover {
+            color: #ff8190;
+        }
+</style>
+
+<div class="d-flex align-items-center justify-content-center" style="height: 100vh;">
+    <div class="p-4 rounded-4 shadow login-container" style="width: 400px;">
         <h5 class="text-center text-muted mb-1">Hackathon Website</h5>
-        <h1 class="mb-4 text-start fw-bold text-dark">Login</h1>
+        <h1 class="mb-4 text-start fw-bold login-title">Login</h1>
 
         <form asp-controller="Home">
             <div class="mb-3 text-start">
@@ -22,11 +75,12 @@
                 <input class="form-control rounded-3" type="password" id="LoginPassword" name="Password" placeholder="Enter password" value="@Model?.Password" />
             </div>
 
-            <button class="btn btn-primary w-100 rounded-3" type="button" onclick="submitLogin()">Login</button>
+            <button class="btn login-button w-100 rounded-3" type="button" onclick="submitLogin()">Login</button>
         </form>
 
         <div class="text-center mt-3">
-            <small class="text-muted">New here? — 
+            <small class="text-muted">
+                New here? —
                 <a asp-controller="Home" asp-action="RegistrationView" class="text-decoration-none">Sign up</a>
             </small>
         </div>
