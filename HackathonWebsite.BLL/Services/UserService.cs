@@ -45,6 +45,21 @@ namespace HackathonWebsite.BLL.Services
             return userReadDto;
         }
 
+        public async Task<UserReadDto?> GetTeacherByIdAsync(int id)
+        {
+            if (id < 0) return null;
+
+            var user = await _context.Users
+                .Include(u => u.Tasks)
+                .FirstOrDefaultAsync(u => u.Id == id && u.Role.Equals("Teacher"));
+
+            if (user == null) return null;
+
+            var userReadDto = _mapper.Map<UserReadDto>(user);
+
+            return userReadDto;
+        }
+
         public async Task<UserReadDto?> GetUserByNameAndPasswordAsync(string username, string password)
         {
             var user = await _context.Users

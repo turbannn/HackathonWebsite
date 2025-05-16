@@ -11,7 +11,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h1 style="font-weight: bold; color: #333;">Welcome, @Model.Username!</h1>
-            <p class="text-muted">Your Hackathon profile</p>
+            <p class="text-muted">Hackathon Teacher profile</p>
         </div>
     </div>
 
@@ -21,7 +21,7 @@
     </div>
 
     <hr/>
-
+    <p class="text-muted">Ocenione roboty</p>
     <table class="table table-hover">
         <thead class="table-light">
         <tr>
@@ -33,20 +33,19 @@
         </tr>
         </thead>
         <tbody>
-            @foreach (var e in Model.Tasks)
-            {
-                <tr>
-                    <td>@e.Id</td>
-                    <td>@e.Name</td>
-                    <td>@e.Rating</td>
-                    <td>@e.Description</td>
-                    <td>
-                        <button type="button" class="btn btn-sm btn-outline-primary me-1" onclick="RedirectToTaskDetailedView(@e.Id)">Details</button>
-                        <button type="button" class="btn btn-sm btn-outline-primary me-1" onclick="RedirectToTaskEditing(@e.Id)">Edit</button>
-                        <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteTask(@e.Id)">Delete</button>
-                    </td>
-                </tr>
-            }
+        @foreach (var e in Model.Tasks)
+        {
+            <tr>
+                <td>@e.Id</td>
+                <td>@e.Name</td>
+                <td>@e.Rating</td>
+                <td>@e.Description</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-outline-primary me-1" onclick="RedirectToTaskEditing(@e.Id)">Edit</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteTask(@e.Id)">Delete</button>
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 

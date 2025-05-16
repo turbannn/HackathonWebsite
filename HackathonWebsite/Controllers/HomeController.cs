@@ -2,7 +2,6 @@ using HackathonWebsite.BLL.Services;
 using HackathonWebsite.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using HackathonWebsite.BLL.DtoEntities.UserDtos;
 
 namespace HackathonWebsite.Controllers
 {
@@ -32,7 +31,16 @@ namespace HackathonWebsite.Controllers
                 return View();
             }
 
-            return RedirectToAction("UserProfileView", "Users");
+            if(User.IsInRole("User") || User.IsInRole("Admin"))
+            {
+                return RedirectToAction("UserProfileView", "Users");
+            }
+            if(User.IsInRole("Teacher"))
+            {
+                return RedirectToAction("TeacherProfileView", "Users");
+            }
+
+            return View();
         }
 
         [HttpGet("/Home/Register")]
@@ -41,11 +49,6 @@ namespace HackathonWebsite.Controllers
             return View("RegistrationView");
         }
 
-        [HttpGet("/Home/LogRegView")]
-        public IActionResult LogRegView()
-        {
-            return View();
-        }
         public IActionResult Test()
         {
             Console.WriteLine("Test Executed!");

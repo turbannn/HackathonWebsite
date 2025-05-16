@@ -16,8 +16,20 @@ namespace HackathonWebsite.Controllers
         }
 
         [Authorize(Roles = "User,Teacher,Admin")]
+        [HttpGet("/Tasks/DetailedTask/{id}")]
+        public async Task<IActionResult> TaskDetailedView(int id)
+        {
+            var task = await _taskService.GetProfileTaskByIdAsync(id);
+
+            if (task is null)
+                return NotFound("Task not found");
+
+            return View(task);
+        }
+
+        [Authorize(Roles = "User,Teacher,Admin")]
         [HttpPost("/Tasks/CreateTask")]
-        public async Task<IActionResult> CreateExpense([FromBody] TaskCreateDto hackathonDto)
+        public async Task<IActionResult> CreateTask([FromBody] TaskCreateDto hackathonDto)
         {
             var idStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "no";
 
@@ -45,6 +57,25 @@ namespace HackathonWebsite.Controllers
 
             return Json(new { success = true, redirectUrl = Url.Action("UserProfileView", "Users") });
         }
+
+        [Authorize(Roles = "Teacher,Admin")]
+        [HttpPut("/Tasks/Rate")]
+        public async Task<IActionResult> Rate([FromBody] TaskRatingDto dto)
+        {
+            var updateResult = await _taskService.UpdateRatingAsync(dto);
+
+            if (!updateResult)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Rating must be between 0 and 100."
+                });
+            }
+
+            return Json(new { success = true, redirectUrl = Url.Action("RedirectToIndex", "Rating") });
+        }
+
 
         [Authorize(Roles = "User,Teacher,Admin")]
         [HttpGet("/Tasks/CreateTask")]

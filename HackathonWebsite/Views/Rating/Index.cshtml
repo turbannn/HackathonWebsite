@@ -1,5 +1,7 @@
 ﻿@model IEnumerable<HackathonWebsite.BLL.DtoEntities.HackathonTaskDtos.TaskRatingReadDto>
 
+<script src="~/js/TaskFrontend.js"></script>
+
 <div class="text-center">
     <h1 class="display-4">Users rating</h1>
     <br />
@@ -22,24 +24,32 @@
                 <td>@r.Name</td>
                 <td>@r.UserName</td>
                 <td>@r.Rating</td>
-                <td>
-                        @if (User.IsInRole("User") || User.IsInRole("Teacher") || User.IsInRole("Admin"))
+                <td class="position-relative">
+                    @if (User.IsInRole("User") || User.IsInRole("Teacher") || User.IsInRole("Admin"))
                     {
-                        <a class="btn btn-sm btn-outline-primary me-1" asp-controller="Rating" asp-action="View" asp-route-username="@r.UserName">
-                            View
-                        </a>
+                        <button type="button" class="btn btn-sm btn-outline-primary me-1 mb-1" onclick="RedirectToTaskDetailedView(@r.Id)">
+                            Details
+                        </button>
                     }
 
                     @if (User.IsInRole("Teacher") || User.IsInRole("Admin"))
                     {
-                        <a class="btn btn-sm btn-outline-primary me-1" asp-controller="Rating" asp-action="Rate" asp-route-username="@r.UserName">
+                        <button type="button" class="btn btn-sm btn-outline-primary me-1 mb-1" onclick="toggleRatePopup(@r.Id)">
                             Rate
-                        </a>
+                        </button>
+
+                        <div id="ratePopup_@r.Id" class="rate-popup border rounded-3 p-3 shadow bg-white position-absolute mt-2" style="z-index: 1000; width: 250px;">
+                            <label for="ratingInput_@r.Id" class="form-label">Rating (0–100)</label>
+                            <input type="number" id="ratingInput_@r.Id" class="form-control form-control-sm mb-2" min="0" max="100" />
+                            <button type="button" class="btn btn-sm btn-outline-success w-100" onclick="submitRating(@r.Id)">
+                                Confirm
+                            </button>
+                        </div>
                     }
 
                     @if (User.IsInRole("Admin"))
                     {
-                        <a class="btn btn-sm btn-outline-danger" asp-controller="Rating" asp-action="Delete" asp-route-username="@r.UserName">
+                        <a class="btn btn-sm btn-outline-danger me-1 mb-1" asp-controller="Rating" asp-action="Delete" asp-route-username="@r.UserName">
                             Delete
                         </a>
                     }

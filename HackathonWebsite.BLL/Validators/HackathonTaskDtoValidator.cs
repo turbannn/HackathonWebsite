@@ -12,7 +12,8 @@ namespace HackathonWebsite.BLL.Validators
                 .GreaterThan(-1).WithMessage("Id is less than 0");
 
             RuleFor(h => h.Rating)
-                .GreaterThan(-1).WithMessage("Rating less than 0 error");
+                .GreaterThan(-1).WithMessage("Error: Rating less than 0")
+                .LessThan(101).WithMessage("Error: Rating is more than 100");
 
             //str
             RuleFor(h => h.Description)

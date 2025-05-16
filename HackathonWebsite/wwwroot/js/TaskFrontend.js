@@ -126,9 +126,90 @@ async function deleteTask(id) {
     }
 }
 
+function submitRating(taskId) {
+    const ratingInput = document.getElementById(`ratingInput_${taskId}`);
+    const ratingValue = ratingInput.value;
+
+    if (!ratingValue || ratingValue < 0 || ratingValue > 100) {
+        alert("Please enter a valid rating between 0 and 100.");
+        return;
+    }
+
+    fetch("/Tasks/Rate", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            id: taskId,
+            rating: parseInt(ratingValue)
+        })
+    })
+        .then(response => response.json())
+        .then(result => {
+            console.log("Server response:", result);
+
+            if (result.success) {
+                window.location.href = result.redirectUrl;
+            } else {
+                alert("Save error: " + (result.message || "Unknown error"));
+            }
+        })
+        .catch(error => {
+            console.error("Request sending error:", error);
+            alert("Data sending error");
+        });
+}
+
+function submitRatingDetails() {
+    const ratingValue = document.getElementById("ratingInput").value;
+    const taskId = document.getElementById("TaskId").value;
+
+    if (!ratingValue || ratingValue < 0 || ratingValue > 100) {
+        alert("Please enter a valid rating between 0 and 100.");
+        return;
+    }
+
+    fetch("/Tasks/Rate", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            id: taskId,
+            rating: parseInt(ratingValue)
+        })
+    })
+        .then(response => response.json())
+        .then(result => {
+            console.log("Server response:", result);
+
+            if (result.success) {
+                window.location.href = result.redirectUrl;
+            } else {
+                alert("Save error: " + (result.message || "Unknown error"));
+            }
+        })
+        .catch(error => {
+            console.error("Request sending error:", error);
+            alert("Data sending error");
+        });
+}
+
+function toggleRatePopup(taskId) {
+    const popup = document.getElementById(`ratePopup_${taskId}`);
+    popup.classList.toggle("show");
+}
+
+function toggleRatePopupDetails() {
+    const popup = document.getElementById("ratePopup");
+    popup.classList.toggle("show");
+}
+
+function RedirectToTaskDetailedView(taskId) {
+    window.location.href = `/Tasks/DetailedTask/${taskId}`;
+}
+
 function RedirectToTaskCreation() {
     window.location.href = "/Tasks/CreateTask";
 }
-function RedirectToTaskEditing(expenseId) {
-    window.location.href = `/Tasks/EditTask/${expenseId}`;
+
+function RedirectToTaskEditing(taskId) {
+    window.location.href = `/Tasks/EditTask/${taskId}`;
 }

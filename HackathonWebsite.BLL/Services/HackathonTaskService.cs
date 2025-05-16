@@ -73,14 +73,25 @@ namespace HackathonWebsite.BLL.Services
                 return false;
             }
 
-            var expense = _mapper.Map<HackathonTask>(hackathonDto);
-
             await _context.HackathonTasks
                 .Where(h => h.Id == hackathonDto.Id)
                 .ExecuteUpdateAsync(setters => setters
                     .SetProperty(h => h.Name, hackathonDto.Name)
                     .SetProperty(h => h.Rating, hackathonDto.Rating)
                     .SetProperty(h => h.Description, hackathonDto.Description));
+
+            return true;
+        }
+
+        public async Task<bool> UpdateRatingAsync(TaskRatingDto hackathonDto)
+        {
+            if (hackathonDto.Id < 0 || hackathonDto.Rating > 100)
+                return false;
+
+            await _context.HackathonTasks
+                .Where(h => h.Id == hackathonDto.Id)
+                .ExecuteUpdateAsync(setters => setters
+                    .SetProperty(h => h.Rating, hackathonDto.Rating));
 
             return true;
         }

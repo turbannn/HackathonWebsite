@@ -85,6 +85,35 @@ namespace HackathonWebsite.Controllers
             return View(user);
         }
 
+        [Authorize(Roles = "Teacher,Admin")]
+        [HttpGet("/User/TeacherProfile")]
+        public async Task<IActionResult> TeacherProfileView()
+        {
+            var idStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "no";
+
+            if (!int.TryParse(idStr, out int id))
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Id parse error"
+                });
+            }
+
+            var user = await _userService.GetTeacherByIdAsync(id);
+
+            if (user is null)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Teacher not found"
+                });
+            }
+
+            return View(user);
+        }
+
         [HttpPost("/User/SubmitRegistration")]
         public async Task<IActionResult> SubmitRegistration([FromBody] UserCreateDto userCreateDto)
         {
