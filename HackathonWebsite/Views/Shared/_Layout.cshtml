@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HackathonWebsite.styles.css" asp-append-version="true" />
+    <script src="~/js/UsersFrontend.js"></script>
     <style>
         .offcanvas-body {
             display: flex;
@@ -39,52 +40,63 @@
     </button>
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
-        <div class="offcanvas-header">
+        <div class="offcanvas-header border-bottom">
             <h4 class="offcanvas-title" id="sidebarMenuLabel">The Hackathon</h4>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
+        <div class="offcanvas-body bg-light">
             <div>
-                <div class="sidebar-header">Navigation</div>
-                <ul class="nav flex-column">
+                <div class="sidebar-header fw-semibold text-secondary mb-3">Navigation</div>
+                <ul class="nav flex-column gap-2">
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="btn btn-light w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Home" asp-action="Index">
+                            🏠 Home
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Rating" asp-action="RedirectToIndex">Rating</a>
+                        <a class="btn btn-light w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Rating" asp-action="RedirectToIndex">
+                            📊 Rating
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" asp-controller="Home" asp-action="RegistrationView">SignUp</a>
+                        <a class="btn btn-light w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Home" asp-action="RegistrationView">
+                            📝 Sign Up
+                        </a>
                     </li>
                 </ul>
             </div>
 
-            <div class="user-profile">
+            <div class="user-profile mt-4">
                 <hr />
                 @if (User?.Identity?.IsAuthenticated == true)
                 {
                     var username = User.Identity.Name;
-                    var role = User.IsInRole("Teacher") ? "Teacher" :
+                    var role = User.IsInRole("Admin") ? "Admin" :
+                        User.IsInRole("Teacher") ? "Teacher" :
                         User.IsInRole("User") ? "User" : "Unknown";
-                    <div>
-                        <strong>👤 @username</strong>
-                        <small>Role: @role</small>
+
+                    <div class="mb-2">
+                        <strong>👤 @username</strong><br />
+                        <small class="text-muted">Role: @role</small>
                     </div>
-                    <a class="btn btn-sm btn-outline-primary mt-2" asp-controller="Users" asp-action="UserProfileView">Profile</a>
-                    <a class="btn btn-sm btn-outline-danger mt-2" asp-controller="Users" asp-action="Logout">Logout</a>
+                    <a class="btn btn-outline-primary w-100 mb-2 rounded-3" asp-controller="Users" asp-action="UserProfileView">Profile</a>
+                    <form>
+                        <button class="btn btn-outline-danger w-100 rounded-3" onclick="logout()">Logout</button>
+                    </form>
+
                 }
                 else
                 {
-                    <div>
-                        <strong>👤 Guest</strong>
-                        <small>Role: None</small>
+                    <div class="mb-2">
+                        <strong>👤 Guest</strong><br />
+                        <small class="text-muted">Role: None</small>
                     </div>
-                    <a class="btn btn-sm btn-outline-primary mt-2" asp-controller="Home" asp-action="Login">Login</a>
+                    <a class="btn btn-outline-primary w-100 rounded-3" asp-controller="Home" asp-action="Login">Login</a>
                 }
             </div>
-
         </div>
     </div>
+
 
     <div class="container">
         <main role="main" class="pb-3">
