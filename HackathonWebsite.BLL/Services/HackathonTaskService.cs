@@ -91,7 +91,8 @@ namespace HackathonWebsite.BLL.Services
             await _context.HackathonTasks
                 .Where(h => h.Id == hackathonDto.Id)
                 .ExecuteUpdateAsync(setters => setters
-                    .SetProperty(h => h.Rating, hackathonDto.Rating));
+                    .SetProperty(h => h.Rating, hackathonDto.Rating)
+                    .SetProperty(h => h.TeacherIdRatedBy, hackathonDto.TeacherIdRatedBy));
 
             return true;
         }

@@ -49,9 +49,9 @@
 
                     @if (User.IsInRole("Admin"))
                     {
-                        <a class="btn btn-sm btn-outline-danger me-1 mb-1" asp-controller="Rating" asp-action="Delete" asp-route-username="@r.UserName">
+                        <button type="button" class="btn btn-sm btn-outline-danger me-1 mb-1" onclick="deleteTask(@r.Id)">
                             Delete
-                        </a>
+                        </button>
                     }
                 </td>
             </tr>

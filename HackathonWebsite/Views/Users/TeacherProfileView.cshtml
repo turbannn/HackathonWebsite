@@ -5,7 +5,6 @@
 }
 
 <script src="~/js/UsersFrontend.js"></script>
-<script src="~/js/TaskFrontend.js"></script>
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -16,12 +15,11 @@
     </div>
 
     <div class="mb-4">
-        <a class="btn btn-outline-success" onclick="RedirectToTaskCreation()">Create New Task</a>
         <button class="btn btn-outline-danger" onclick="logout()">Log Out</button>
     </div>
 
     <hr/>
-    <p class="text-muted">Ocenione roboty</p>
+    <h3>Rated tasks</h3>
     <table class="table table-hover">
         <thead class="table-light">
         <tr>
@@ -29,7 +27,6 @@
             <th>Name</th>
             <th>Rating</th>
             <th>Description</th>
-            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -40,10 +37,6 @@
                 <td>@e.Name</td>
                 <td>@e.Rating</td>
                 <td>@e.Description</td>
-                <td>
-                    <button type="button" class="btn btn-sm btn-outline-primary me-1" onclick="RedirectToTaskEditing(@e.Id)">Edit</button>
-                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteTask(@e.Id)">Delete</button>
-                </td>
             </tr>
         }
         </tbody>

@@ -42,7 +42,7 @@ namespace HackathonWebsite.Controllers
 
             return View();
         }
-
+        
         [HttpGet("/Home/Register")]
         public IActionResult RegistrationView()
         {

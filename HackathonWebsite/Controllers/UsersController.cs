@@ -53,7 +53,13 @@ namespace HackathonWebsite.Controllers
                 Expires = DateTime.Now.AddMinutes(15)
             });
 
-            return Json(new { success = true, redirectUrl = Url.Action("UserProfileView", "Users") });
+            if(user.Role.Equals("User") || user.Role.Equals("Admin"))
+                return Json(new { success = true, redirectUrl = Url.Action("UserProfileView", "Users") });
+
+            if (user.Role.Equals("Teacher"))
+                return Json(new { success = true, redirectUrl = Url.Action("TeacherProfileView", "Users") });
+
+            return Ok();
         }
 
         [Authorize(Roles = "User,Teacher,Admin")]

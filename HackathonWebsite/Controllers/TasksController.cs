@@ -27,7 +27,7 @@ namespace HackathonWebsite.Controllers
             return View(task);
         }
 
-        [Authorize(Roles = "User,Teacher,Admin")]
+        [Authorize(Roles = "User,Admin")]
         [HttpPost("/Tasks/CreateTask")]
         public async Task<IActionResult> CreateTask([FromBody] TaskCreateDto hackathonDto)
         {
@@ -62,6 +62,19 @@ namespace HackathonWebsite.Controllers
         [HttpPut("/Tasks/Rate")]
         public async Task<IActionResult> Rate([FromBody] TaskRatingDto dto)
         {
+            var idStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "no";
+
+            if (!int.TryParse(idStr, out int id))
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Id parse error"
+                });
+            }
+
+            dto.TeacherIdRatedBy = id;
+
             var updateResult = await _taskService.UpdateRatingAsync(dto);
 
             if (!updateResult)
@@ -77,7 +90,7 @@ namespace HackathonWebsite.Controllers
         }
 
 
-        [Authorize(Roles = "User,Teacher,Admin")]
+        [Authorize(Roles = "User,Admin")]
         [HttpGet("/Tasks/CreateTask")]
         public IActionResult CreateTask()
         {
@@ -120,29 +133,53 @@ namespace HackathonWebsite.Controllers
             return View(expense);
         }
 
-        [Authorize(Roles = "User,Teacher,Admin")] //look
-        [HttpGet("/Tasks/GetTask/{id}")]
-        public async Task<IActionResult> GetExpense(int id)
-        {
-            var expense = await _taskService.GetProfileTaskByIdAsync(id);
-
-            if (expense == null)
-                return NotFound(new { success = false, message = "Expense not found" });
-
-            return Ok(expense);
-        }
-
-        [Authorize(Roles = "User,Teacher,Admin")] //look
+        [Authorize(Roles = "User,Admin")]
         [HttpDelete("Tasks/DeleteTask/{id}")]
-        public async Task<IActionResult> DeleteExpense(int id)
+        public async Task<IActionResult> DeleteTask(int id)
         {
-            var deleteTaskResult = await _taskService.DeleteTaskAsync(id);
+            var task = await _taskService.GetProfileTaskByIdAsync(id);
+            if (task == null)
+            {
+                return NotFound("Task not found");
+            }
 
-            if (!deleteTaskResult)
-                return BadRequest("Invalid data");
+            var userIdStr = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (!int.TryParse(userIdStr, out int userId))
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Invalid user ID"
+                });
+            }
+
+            var isAdmin = User.IsInRole("Admin");
+
+            if (!isAdmin && task.UserId != userId)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "You can only delete your own tasks"
+                });
+            }
+
+            var deleteResult = await _taskService.DeleteTaskAsync(id);
+            if (!deleteResult)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Task deletion failed"
+                });
+            }
+
+            if(isAdmin)
+                return Json(new { success = true, redirectUrl = Url.Action("RedirectToIndex", "Rating") });
 
             return Json(new { success = true, redirectUrl = Url.Action("UserProfileView", "Users") });
         }
+
 
         public IActionResult Index()
         {

@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using HackathonWebsite.BLL.DtoEntities.UserDtos;
-using HackathonWebsite.BLL.Services;
+﻿using HackathonWebsite.BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

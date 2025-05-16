@@ -122,7 +122,7 @@ async function deleteTask(id) {
         }
     } catch (error) {
         console.error("Request sending error:", error);
-        alert("Data update error");
+        alert("Deleting error");
     }
 }
 

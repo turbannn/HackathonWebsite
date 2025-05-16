@@ -49,11 +49,12 @@ namespace HackathonWebsite.BLL.Services
         {
             if (id < 0) return null;
 
-            var user = await _context.Users
-                .Include(u => u.Tasks)
-                .FirstOrDefaultAsync(u => u.Id == id && u.Role.Equals("Teacher"));
-
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id && u.Role.Equals("Teacher"));
             if (user == null) return null;
+
+            var tasks = await _context.HackathonTasks.Where(h => h.TeacherIdRatedBy == user.Id).ToListAsync();
+
+            user.Tasks = tasks;
 
             var userReadDto = _mapper.Map<UserReadDto>(user);
 

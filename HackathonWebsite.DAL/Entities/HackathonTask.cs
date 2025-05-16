@@ -9,6 +9,7 @@ namespace HackathonWebsite.DAL.Entities
         public string Name { get; set; } = null!;
         public string Description { get; set; } = null!;
         public int Rating { get; set; }
+        public int TeacherIdRatedBy { get; set; }
 
         public int UserId { get; set; }
         [ForeignKey(nameof(UserId))]
