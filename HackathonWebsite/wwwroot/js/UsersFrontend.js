@@ -45,7 +45,7 @@ async function submitRegistration() {
     const id = parseInt(document.getElementById("UserId").value) || 0;
     const role = document.getElementById("UserRole").value.trim();
     const username = document.getElementById("UserUsername").value.trim();
-    const password = document.getElementById("UserPassword").value.trim();
+    const password = document.getElementById("LoginPassword").value.trim();
 
     if (!username) {
         alert("Error: Username cant be empty");

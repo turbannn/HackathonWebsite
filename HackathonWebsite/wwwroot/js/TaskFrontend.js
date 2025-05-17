@@ -194,8 +194,19 @@ function submitRatingDetails() {
 
 function toggleRatePopup(taskId) {
     const popup = document.getElementById(`ratePopup_${taskId}`);
+    
+    if (!popup.dataset.moved) {
+        document.body.appendChild(popup);
+        popup.dataset.moved = true;
+    }
+
+    const rect = event.target.getBoundingClientRect();
+    popup.style.position = "absolute";
+    popup.style.left = `${rect.left + window.scrollX}px`;
+    popup.style.top = `${rect.bottom + window.scrollY}px`;
     popup.classList.toggle("show");
 }
+
 
 function toggleRatePopupDetails() {
     const popup = document.getElementById("ratePopup");
