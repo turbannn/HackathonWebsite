@@ -1,5 +1,4 @@
-﻿
-using HackathonWebsite.BLL.Interfaces;
+﻿using HackathonWebsite.BLL.Interfaces;
 
 namespace HackathonWebsite.BLL.DtoEntities.UserDtos
 {

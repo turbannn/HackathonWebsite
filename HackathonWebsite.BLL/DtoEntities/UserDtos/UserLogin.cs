@@ -1,5 +1,4 @@
-﻿
-namespace HackathonWebsite.BLL.DtoEntities.UserDtos
+﻿namespace HackathonWebsite.BLL.DtoEntities.UserDtos
 {
     public class UserLogin
     {

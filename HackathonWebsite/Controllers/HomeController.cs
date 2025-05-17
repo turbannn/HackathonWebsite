@@ -42,7 +42,13 @@ namespace HackathonWebsite.Controllers
 
             return View();
         }
-        
+
+        [HttpGet("/Home/AccessDenied")]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         [HttpGet("/Home/Register")]
         public IActionResult RegistrationView()
         {

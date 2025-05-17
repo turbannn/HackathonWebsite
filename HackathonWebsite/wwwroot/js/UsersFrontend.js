@@ -86,3 +86,8 @@ async function logout() {
     await fetch("/User/Logout", { method: "POST" });
     window.location.href = "/";
 }
+
+function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("LoginPassword");
+    passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+}

@@ -1,5 +1,4 @@
-﻿
-namespace HackathonWebsite.BLL.Interfaces
+﻿namespace HackathonWebsite.BLL.Interfaces
 {
     public interface ITaskTransferObject : ITransferObject
     {
