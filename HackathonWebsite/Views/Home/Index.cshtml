@@ -3,7 +3,25 @@
 }
 
 <script src="~/js/HomeFrontend.js"></script>
+<link rel="stylesheet" href="~/css/homeStyle.css" />
+<link rel="stylesheet" href="~/css/profileStyle.css" />
 
-<div class="d-flex flex-column align-items-center justify-content-center" style="height: 80vh;">
-    <h1 class="display-3 mb-4" style="font-weight: bold; color: #333;">Hackathon website</h1>
+
+<div class="home-container d-flex flex-column align-items-center justify-content-center">
+    <h1 class="fade-in display-3 mb-4 fw-bold text-dark text-center">Welcome to the Hackathon</h1>
+
+    <p class="fade-in delay-1 fs-5 text-muted text-center w-75">
+        Join the most thrilling coding event of the year! Compete with the brightest minds, solve real-world challenges,
+        and push the boundaries of innovation. Whether you're a beginner or a pro, this is your chance to shine.
+    </p>
+
+    <p class="fade-in delay-2 fs-6 text-secondary text-center w-75">
+        🗓️ Date: November 15–17, 2025<br />
+        📍 Location: Online & In-person (Hybrid)<br />
+        🏆 Prizes, networking, mentorship & more!
+    </p>
+
+    <button class="fade-in delay-3 btn btn-outline-primary mt-4 px-4 py-2" onclick="RedirectToRegistration()">
+        Sign Up Now
+    </button>
 </div>

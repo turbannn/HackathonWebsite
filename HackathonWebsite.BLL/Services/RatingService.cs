@@ -25,7 +25,11 @@ namespace HackathonWebsite.BLL.Services
 
             var userDtos = _mapper.Map<List<TaskRatingReadDto>>(users);
 
-            return userDtos;
+            var sortedDtos = userDtos
+                .OrderByDescending(dto => dto.Rating)
+                .ToList();
+
+            return sortedDtos;
         }
     }
 }

@@ -11,12 +11,14 @@
     <h1 class="mb-4 fw-bold text-center text-dark">Update Your Hackathon Task</h1>
 
     <form>
-        <input type="hidden" id="TaskId" name="Id" value="@Model?.Id" />
-        <input type="hidden" id="TaskRating" name="Rating" value="@Model?.Rating" />
+        <a type="button" class="btn btn-outline-primary mb-3" href="javascript:history.back()">🔙 Back</a>
+
+        <input type="hidden" id="TaskId" name="Id" value="@Model?.Id"/>
+        <input type="hidden" id="TaskRating" name="Rating" value="@Model?.Rating"/>
 
         <div class="mb-4">
             <label for="TaskName" class="form-label fw-semibold">📝 Task Name</label>
-            <input class="form-control rounded-3" type="text" id="TaskName" name="Name" placeholder="Change name" value="@Model?.Name" />
+            <input class="form-control rounded-3" type="text" id="TaskName" name="Name" placeholder="Change name" value="@Model?.Name"/>
         </div>
 
         <div class="mb-4">

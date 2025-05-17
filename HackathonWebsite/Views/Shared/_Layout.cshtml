@@ -110,11 +110,14 @@
                             📊 Rating
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="btn w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Home" asp-action="RegistrationView">
-                            📝 Sign Up
-                        </a>
-                    </li>
+                    @if (User?.Identity?.IsAuthenticated != true)
+                    {
+                        <li class="nav-item">
+                            <a class="btn w-100 text-start shadow-sm rounded-3 py-2 px-3" asp-controller="Home" asp-action="RegistrationView">
+                                📝 Sign Up
+                            </a>
+                        </li>
+                    }
                 </ul>
             </div>
 
@@ -154,12 +157,6 @@
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted mt-5">
-        <div class="container">
-            &copy; 2025 - Hi there! :)
-        </div>
-    </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
