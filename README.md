@@ -65,17 +65,30 @@ All styles are split into:
 
 ## 📸 Screenshots
 
+### Functionality
+
+![User Profile](assets/functionality.gif)
+
+
 ### Home Page
 
 ![Task Details](assets/h1.png)
 
-### User Profile (Teacher)
+
+### User Profile
+
+![Task Details](assets/userProfile.png)
+
+
+### Teacher Profile
 
 ![Task Details](assets/h2.png)
+
 
 ### Login Page
 
 ![Task Details](assets/h3.png)
+
 
 ### Rating Page with Sidebar
 
