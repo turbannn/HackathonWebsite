@@ -1,8 +1,10 @@
 # 🧠 Hackathon Management System
 
-A modular and role-based web platform designed for managing tasks and ratings during hackathons.
+An ASP.NET MVC commercial project.
+The decision to make a MVC project was made because of the needed simplicity of the project.
 
-Built with a clear **three-layer architecture** (DAL → BLL → Web), this project supports secure task rating, user profiles, and role-specific interaction patterns. The focus is on simplicity, portability, and extensibility.
+Built with a **three-layer architecture** (DAL → BLL → Web).
+It includes task rating, user profiles, and role-specific interaction patterns.
 
 ---
 
@@ -13,7 +15,7 @@ Built with a clear **three-layer architecture** (DAL → BLL → Web), this proj
 - **DAL (Data Access Layer)**  
   Built with Entity Framework Core using **SQLite** for lightweight and portable storage.  
   Designed to minimize setup complexity.  
-  - **Entities**:
+  - **Db Entities**:
     - `HackathonTask`
     - `User`
 
@@ -27,31 +29,28 @@ Built with a clear **three-layer architecture** (DAL → BLL → Web), this proj
 
 ### Features & Libraries
 
-- 🔐 **JWT Authentication**  
-  - Access-token based  
-  - Role-aware access control
+- 🔐 **JWT Authentication**
+  - Access-token based
+  - Made a decision not to make refresh rokens
 
 - 🔄 **AutoMapper**  
   - Smooth mapping between entities and DTOs  
   - Reduces boilerplate code
 
 - ✅ **FluentValidation**  
-  - Clean model validation  
-  - _"Personally, I find it a powerful and expressive tool I enjoy using."_
+  - Used for model validation  
+  - _"And also, I just like how it works"_
 
 ---
 
 ## 🎨 Styling & UI
 
-The UI design emphasizes clarity and user-role awareness:
+The UI design:
 
 - **Profile and task pages**  
   - White central containers  
   - Rounded corners and subtle shadows  
   - Dark radial gradient background
-
-- **Responsive design**  
-  - Adaptive spacing and layout for mobile screens
 
 - **Home page animation**  
   - Smooth text fade-in introducing the hackathon  
@@ -60,5 +59,24 @@ The UI design emphasizes clarity and user-role awareness:
 All styles are split into:
 - `profileStyle.css`
 - `homeStyle.css`
-
+- `Snow.css`(additional style file)
+  
 ---
+
+## 📸 Screenshots
+
+### Home Page
+
+![Task Details](assets/h1.png)
+
+### User Profile (Teacher)
+
+![Task Details](assets/h2.png)
+
+### Login Page
+
+![Task Details](assets/h3.png)
+
+### Rating Page with Sidebar
+
+![User Profile](assets/h4.png)
