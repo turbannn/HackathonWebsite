@@ -17,6 +17,7 @@ Its goal is to provide a clean and efficient tool for hackathon coordinators and
 
 
 🛠 Tech Stack
+
 The application is built with a three-layer architecture — DAL, BLL, and Web — for clarity and separation of concerns:
 
 DAL (Data Access Layer): Entity Framework Core using SQLite as the database engine. Chosen for its lightweight nature and ease of use in portable, demo-friendly projects. The database consists of two primary entities:
