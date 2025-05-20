@@ -1,57 +1,64 @@
-📚 Introduction
+# 🧠 Hackathon Management System
 
-This project is a Hackathon Task Management Web Application designed to streamline the process of creating, rating, and managing tasks within a hackathon environment. Built using ASP.NET Core MVC, it features a clear role-based access system supporting Admins, Teachers, and Users.
+A modular and role-based web platform designed for managing tasks and ratings during hackathons.
 
-The platform enables:
+Built with a clear **three-layer architecture** (DAL → BLL → Web), this project supports secure task rating, user profiles, and role-specific interaction patterns. The focus is on simplicity, portability, and extensibility.
 
-Task creation and description input
+---
 
-Rating of tasks by authorized roles
+## 🛠 Tech Stack
 
-User-specific task overviews
+### Architecture
 
-Secure role-based interface customization
+- **DAL (Data Access Layer)**  
+  Built with Entity Framework Core using **SQLite** for lightweight and portable storage.  
+  Designed to minimize setup complexity.  
+  - **Entities**:
+    - `HackathonTask`
+    - `User`
 
-Its goal is to provide a clean and efficient tool for hackathon coordinators and participants to interact in a structured, intuitive environment.
+- **BLL (Business Logic Layer)**  
+  Encapsulates core logic, validation, and DTO mappings.
 
+- **Web (Presentation Layer)**  
+  ASP.NET Core MVC application providing RESTful endpoints and dynamic Razor views.
 
+---
 
-🛠 Tech Stack
+### Features & Libraries
 
-The application is built with a three-layer architecture — DAL, BLL, and Web — for clarity and separation of concerns:
+- 🔐 **JWT Authentication**  
+  - Access-token based  
+  - Role-aware access control
 
-DAL (Data Access Layer): Entity Framework Core using SQLite as the database engine. Chosen for its lightweight nature and ease of use in portable, demo-friendly projects. The database consists of two primary entities:
+- 🔄 **AutoMapper**  
+  - Smooth mapping between entities and DTOs  
+  - Reduces boilerplate code
 
-HackathonTask
+- ✅ **FluentValidation**  
+  - Clean model validation  
+  - _"Personally, I find it a powerful and expressive tool I enjoy using."_
 
-User
+---
 
-BLL (Business Logic Layer): Handles application logic, validation, DTO mapping, and service composition.
+## 🎨 Styling & UI
 
-Web (Presentation Layer): ASP.NET Core MVC project responsible for routing, views, and user interaction.
+The UI design emphasizes clarity and user-role awareness:
 
-Additional components:
+- **Profile and task pages**  
+  - White central containers  
+  - Rounded corners and subtle shadows  
+  - Dark radial gradient background
 
-JWT Authentication (Access Token only): Ensures secure, stateless authentication across protected endpoints.
+- **Responsive design**  
+  - Adaptive spacing and layout for mobile screens
 
-AutoMapper: Simplifies object mapping between entities and DTOs. It helps reduce boilerplate code and improves maintainability.
+- **Home page animation**  
+  - Smooth text fade-in introducing the hackathon  
+  - Snowflake animation replaced with modern subtle theming
 
-FluentValidation: Used for validating incoming models. A powerful and expressive library — "I personally like it for its clarity and flexibility." 😊
+All styles are split into:
+- `profileStyle.css`
+- `homeStyle.css`
 
-
-🎨 Styling & UI
-The frontend is designed with attention to visual clarity and role-oriented UX, including:
-
-Profile pages and task-related views styled with a soft, modern look:
-
-White content containers on a radial dark blue background
-
-Rounded corners and subtle shadows
-
-Responsive design with layout adjustments for smaller screens
-
-Home page features a smooth animated entrance, gradually revealing hackathon info to enhance first-time impressions.
-
-Snowflake effects and animated transitions are used sparingly to give the UI a lightweight and modern feel.
-
-All custom styles are organized within profileStyle.css and homeStyle.css.
+---
