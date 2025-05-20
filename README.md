@@ -1,4 +1,5 @@
 📚 Introduction
+
 This project is a Hackathon Task Management Web Application designed to streamline the process of creating, rating, and managing tasks within a hackathon environment. Built using ASP.NET Core MVC, it features a clear role-based access system supporting Admins, Teachers, and Users.
 
 The platform enables:
