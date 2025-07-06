@@ -10,7 +10,7 @@ namespace HackathonWebsite.DAL.Configuration
         {
             builder.HasKey(h => h.Id);
 
-            builder.Property(h => h.Name).IsRequired().HasMaxLength(30);
+            builder.Property(h => h.Name).IsRequired().HasMaxLength(1000);
             builder.Property(h => h.Description).IsRequired().HasMaxLength(100);
         }
     }

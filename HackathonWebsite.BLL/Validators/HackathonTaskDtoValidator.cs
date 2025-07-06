@@ -21,7 +21,7 @@ namespace HackathonWebsite.BLL.Validators
                 .NotEmpty().WithMessage("Description empty error");
 
             RuleFor(h => h.Name)
-                .MaximumLength(40).WithMessage("Name is too long")
+                .MaximumLength(1000).WithMessage("Name is too long")
                 .NotEmpty().WithMessage("Name empty error");
         }
     }
