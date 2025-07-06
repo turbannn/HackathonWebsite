@@ -66,7 +66,7 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-app.UseMiddleware<ExceptionHandlingMiddleware>();
+//app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 using (var scope = app.Services.CreateScope())
 {
@@ -81,7 +81,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
+/*
 app.Use(async (context, next) =>
 {
     await next();
@@ -91,6 +91,7 @@ app.Use(async (context, next) =>
         context.Response.Redirect("/Home/TryLogin");
     }
 });
+*/
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
